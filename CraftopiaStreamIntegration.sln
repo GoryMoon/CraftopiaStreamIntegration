@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftopiaStreamIntegration", "CraftopiaStreamIntegration\CraftopiaStreamIntegration.csproj", "{DBCF58A2-E813-49DD-9BF0-C664DF5E9E3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftopiaActions", "CraftopiaActions\CraftopiaActions.csproj", "{2D69FB7C-B5A8-4C39-88BC-FB61334ABAE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftopiaPatcher", "CraftopiaPatcher\CraftopiaPatcher.csproj", "{655C3EE3-935E-4FAC-816E-14344E1DE104}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBCF58A2-E813-49DD-9BF0-C664DF5E9E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBCF58A2-E813-49DD-9BF0-C664DF5E9E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBCF58A2-E813-49DD-9BF0-C664DF5E9E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBCF58A2-E813-49DD-9BF0-C664DF5E9E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D69FB7C-B5A8-4C39-88BC-FB61334ABAE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D69FB7C-B5A8-4C39-88BC-FB61334ABAE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D69FB7C-B5A8-4C39-88BC-FB61334ABAE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D69FB7C-B5A8-4C39-88BC-FB61334ABAE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655C3EE3-935E-4FAC-816E-14344E1DE104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655C3EE3-935E-4FAC-816E-14344E1DE104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655C3EE3-935E-4FAC-816E-14344E1DE104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655C3EE3-935E-4FAC-816E-14344E1DE104}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

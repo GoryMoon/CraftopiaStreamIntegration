@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{DBCF58A2-E813-49DD-9BF0-C664DF5E9E3C}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>CraftopiaStreamIntegration</RootNamespace>
+        <AssemblyName>CraftopiaStreamIntegration</AssemblyName>
+        <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="0Harmony, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\0Harmony.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Assembly-CSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\Assembly-CSharp.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="BepInEx, Version=5.3.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\BepInEx.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="BepInEx.Harmony, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\BepInEx.Harmony.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="MonoMod.RuntimeDetour, Version=20.8.3.5, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\MonoMod.RuntimeDetour.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+          <HintPath>..\..\..\StreamIntegrationApp\Newtonsoft.Json.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+        <Reference Include="Unity.InputSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\Unity.InputSystem.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\UnityEngine.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\UnityEngine.CoreModule.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\UnityEngine.PhysicsModule.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\UnityEngine.UI.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="ActionManager.cs" />
+        <Compile Include="Actions\BaseAction.cs" />
+        <Compile Include="Actions\ChangeMouseSensitivity.cs" />
+        <Compile Include="Actions\GiveItem.cs" />
+        <Compile Include="Actions\HealPlayer.cs" />
+        <Compile Include="Actions\InventoryBomb.cs" />
+        <Compile Include="Actions\InvertControls.cs" />
+        <Compile Include="Actions\InvertMouse.cs" />
+        <Compile Include="Actions\MessageAction.cs" />
+        <Compile Include="Actions\MovePlayer.cs" />
+        <Compile Include="Actions\RefillHunger.cs" />
+        <Compile Include="Actions\RefillMana.cs" />
+        <Compile Include="Actions\RefillStamina.cs" />
+        <Compile Include="Actions\SpawnMob.cs" />
+        <Compile Include="CSIPlugin.cs" />
+        <Compile Include="IntegrationManager.cs" />
+        <Compile Include="AccessUtils.cs" />
+        <Compile Include="Patches.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Utils.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Mod Include=".\bin\debug\CraftopiaStreamIntegration.*" />
+        <Mod Include=".\bin\debug\Humanizer.dll" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Humanizer.Core" Version="2.8.26" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+    <Target Name="BuildMod" AfterTargets="Build">
+        <Copy SourceFiles="@(Mod)" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\Craftopia\BepInEx\plugins\StreamIntegration" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" />
+    </Target>
+
+</Project>
