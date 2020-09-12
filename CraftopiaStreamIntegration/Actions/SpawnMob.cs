@@ -15,7 +15,7 @@ namespace CraftopiaStreamIntegration.Actions
         private byte _level;
         
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate, PropertyName = "amount")]
-        private string _amount;
+        private int _amount;
         
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate, PropertyName = "radius")]
         private int _radius;
@@ -33,22 +33,25 @@ namespace CraftopiaStreamIntegration.Actions
                 AccessUtils.PopMessage(6, "Integration", "<color=\"red\">Invalid mob ID in spawn mob action!");
                 return ActionResponse.Done;
             }
-            
-            for (var index = 0; index < 10; ++index)
+
+            for (var i = 0; i < _amount; i++)
             {
-                var radiusVector = OcUtility.calcCircleVec() * OcUtility.GaussianNormalizeRange(0.0f, _radius);
-                var spawnVector = player.transform.position + radiusVector + Vector3.up * 15f;
-                if (!Physics.Raycast(spawnVector, Vector3.down, out _, 200f, 1024))
+                for (var index = 0; index < 10; ++index)
                 {
-                    var guid = mobManager.doSpawn_FreeSlot_CheckHost_WithRayCheck(id, false, spawnVector, _level, true);
-                    var em = mobManager.getEmFromGuid(guid);
-                    em.SetCustomName(From);
-                    if (_despawnTime > 0)
+                    var radiusVector = OcUtility.calcCircleVec() * OcUtility.GaussianNormalizeRange(0.0f, _radius);
+                    var spawnVector = player.transform.position + radiusVector + Vector3.up * 15f;
+                    if (!Physics.Raycast(spawnVector, Vector3.down, out _, 200f, 1024))
                     {
-                        em.StartCoroutine(DeSpawn(_despawnTime, guid));
-                    }
+                        var guid = mobManager.doSpawn_FreeSlot_CheckHost_WithRayCheck(id, false, spawnVector, _level);
+                        var em = mobManager.getEmFromGuid(guid);
+                        em.SetCustomName(From);
+                        if (_despawnTime > 0)
+                        {
+                            em.StartCoroutine(DeSpawn(_despawnTime, guid));
+                        }
                     
-                    break;
+                        break;
+                    }
                 }
             }
 

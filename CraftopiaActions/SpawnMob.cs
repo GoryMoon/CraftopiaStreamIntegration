@@ -13,7 +13,7 @@ namespace CraftopiaActions
         
         [DefaultValue(0)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate, PropertyName = "level")]
-        private int _level;
+        private string _level;
         
         [DefaultValue("1")]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate, PropertyName = "amount")]
@@ -37,6 +37,7 @@ namespace CraftopiaActions
         
         protected override SpawnMob Process(SpawnMob action, string username, string from, Dictionary<string, object> parameters)
         {
+            action._level = StringToInt(_level, 0, parameters).ToString();
             action._amount = StringToInt(_amount, 1, parameters).ToString();
             action._scaleMin = StringToFloat(_scaleMin, 0.1f, parameters).ToString(CultureInfo.InvariantCulture);
             action._scaleMax = StringToFloat(_scaleMax, 0.1f, parameters).ToString(CultureInfo.InvariantCulture);

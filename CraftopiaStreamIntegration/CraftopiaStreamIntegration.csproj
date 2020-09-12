@@ -87,6 +87,7 @@
         <Compile Include="Actions\ChangeMouseSensitivity.cs" />
         <Compile Include="Actions\GiveItem.cs" />
         <Compile Include="Actions\HealPlayer.cs" />
+        <Compile Include="Actions\Ignite.cs" />
         <Compile Include="Actions\InventoryBomb.cs" />
         <Compile Include="Actions\InvertControls.cs" />
         <Compile Include="Actions\InvertMouse.cs" />

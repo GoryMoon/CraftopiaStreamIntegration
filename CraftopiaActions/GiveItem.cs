@@ -6,7 +6,7 @@ namespace CraftopiaActions
 {
     public class GiveItem: BaseAction<GiveItem>
     {
-        [DefaultValue(1)]
+        [DefaultValue(2050)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate, PropertyName = "id")]
         private int _id;
         
