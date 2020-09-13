@@ -23,6 +23,9 @@ namespace CraftopiaStreamIntegration.Actions
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate, PropertyName = "despawn_time")]
         private float _despawnTime;
 
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate, PropertyName = "add_player_level")]
+        private bool _addPlayerLevel;
+        
         public override ActionResponse Handle()
         {
             var player = OcPlMaster.Inst;
@@ -42,7 +45,7 @@ namespace CraftopiaStreamIntegration.Actions
                     var spawnVector = player.transform.position + radiusVector + Vector3.up * 15f;
                     if (!Physics.Raycast(spawnVector, Vector3.down, out _, 200f, 1024))
                     {
-                        var guid = mobManager.doSpawn_FreeSlot_CheckHost_WithRayCheck(id, false, spawnVector, _level);
+                        var guid = mobManager.doSpawn_FreeSlot_CheckHost_WithRayCheck(id, false, spawnVector,  (byte) (_level + Math.Max(0, _addPlayerLevel ? player.PlLevelCtrl.Level.Value: 0)));
                         var em = mobManager.getEmFromGuid(guid);
                         em.SetCustomName(From);
                         if (_despawnTime > 0)

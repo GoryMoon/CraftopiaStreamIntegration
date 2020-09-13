@@ -60,6 +60,9 @@
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
         <Reference Include="System.Xml" />
+        <Reference Include="UniRx, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\UniRx.dll</HintPath>
+        </Reference>
         <Reference Include="Unity.InputSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>Libs\Unity.InputSystem.dll</HintPath>
           <Private>False</Private>
@@ -71,6 +74,9 @@
         <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>Libs\UnityEngine.CoreModule.dll</HintPath>
           <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>Libs\UnityEngine.ImageConversionModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>Libs\UnityEngine.PhysicsModule.dll</HintPath>

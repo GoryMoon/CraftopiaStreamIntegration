@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using HarmonyLib;
 using Humanizer;
@@ -46,7 +47,8 @@ namespace CraftopiaStreamIntegration
                     Description = item.Description,
                     Rarity = item.DisplayRarityType.Humanize(LetterCasing.Title),
                     Category = item.ItemCategory.Humanize(LetterCasing.Title).Substring(4),
-                    Durability = item.DurabilityValue
+                    Durability = item.DurabilityValue,
+                    Image = Convert.ToBase64String(DuplicateTexture(item.ItemImage_Icon.texture).EncodeToPNG())
                 })
                 .Cast<object>());
 
@@ -65,7 +67,22 @@ namespace CraftopiaStreamIntegration
             var enchantmentString = JsonConvert.SerializeObject(enchantments, Formatting.None);
             File.WriteAllText(Application.dataPath + "/enchantments.json", enchantmentString);
         }
-        
+
+
+        private static Texture2D DuplicateTexture(Texture source)
+        {
+            var renderTexture = RenderTexture.GetTemporary(source.width, source.height, 0, RenderTextureFormat.Default, RenderTextureReadWrite.Linear);
+            Graphics.Blit(source, renderTexture);
+            Graphics.Blit(source, renderTexture);
+            var previous = RenderTexture.active;
+            RenderTexture.active = renderTexture;
+            var readableText = new Texture2D(source.width, source.height);
+            readableText.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+            readableText.Apply();
+            RenderTexture.active = previous;
+            RenderTexture.ReleaseTemporary(renderTexture);
+            return readableText;
+        }
         
         private struct JsonItem
         {
@@ -86,6 +103,9 @@ namespace CraftopiaStreamIntegration
             
             [JsonProperty("durability")]
             public float Durability;
+
+            [JsonProperty("image")]
+            public string Image;
         }
         
         private struct JsonEnchantment

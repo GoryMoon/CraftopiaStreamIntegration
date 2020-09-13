@@ -35,6 +35,10 @@ namespace CraftopiaActions
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate, PropertyName = "despawn_time")]
         private float _despawnTime;
         
+        [DefaultValue(false)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate, PropertyName = "add_player_level")]
+        private bool _addPlayerLevel;
+        
         protected override SpawnMob Process(SpawnMob action, string username, string from, Dictionary<string, object> parameters)
         {
             action._level = StringToInt(_level, 0, parameters).ToString();
