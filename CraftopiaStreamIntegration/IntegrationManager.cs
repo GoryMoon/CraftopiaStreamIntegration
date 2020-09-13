@@ -50,7 +50,6 @@ namespace CraftopiaStreamIntegration
                                     }
                                     catch (Win32Exception e)
                                     {
-                                        _logger.LogError($"Error in pipe connection: {e}");
                                         Thread.Sleep(500);
                                     }
                                     catch (Exception e)

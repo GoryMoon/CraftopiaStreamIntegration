@@ -27,6 +27,7 @@ namespace CraftopiaStreamIntegration
             AddAction(typeof(InvertControls));
             AddAction(typeof(InvertMouse));
             AddAction(typeof(Ignite));
+            AddAction(typeof(DropBomb));
             
             AddAction(typeof(HealPlayer));
             AddAction(typeof(RefillMana));

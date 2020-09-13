@@ -10,12 +10,15 @@ namespace CraftopiaStreamIntegration
         private static FastInvokeHandler _sendChatMessage;
         private static FastInvokeHandler _getCustomNameField;
         private static FastInvokeHandler _setCustomNameField;
+        private static AccessTools.FieldRef<OcCharacter, OcObjPoolCtrl> _poolCtrl;
 
         public static void Init()
         {
             _sendChatMessage = MethodInvoker.GetHandler(AccessTools.Method("OcUI_ChatHandler:PopMessage", new []{ typeof(int), typeof(string), typeof(string) }));
             _getCustomNameField = MethodInvoker.GetHandler(AccessTools.Method(typeof(OcEm), "get_CustomName"));
             _setCustomNameField = MethodInvoker.GetHandler(AccessTools.Method(typeof(OcEm), "set_CustomName", new []{ typeof(string) }));
+
+            _poolCtrl = AccessTools.FieldRefAccess<OcCharacter, OcObjPoolCtrl>("_PoolCtrl");
         }
         
         public static void PopMessage(int netId, string speakerName, string message)
@@ -32,10 +35,10 @@ namespace CraftopiaStreamIntegration
         {
             return (string) _getCustomNameField.Invoke(data);
         }
-        
-        public static bool HasCustomName(this OcEm data)
+
+        public static OcObjPoolCtrl GetPoolCtrl(OcCharacter ctx)
         {
-            return data.GetCustomName() != null;
+            return _poolCtrl.Invoke(ctx);
         }
     }
 }

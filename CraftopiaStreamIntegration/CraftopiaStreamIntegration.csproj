@@ -91,6 +91,7 @@
         <Compile Include="ActionManager.cs" />
         <Compile Include="Actions\BaseAction.cs" />
         <Compile Include="Actions\ChangeMouseSensitivity.cs" />
+        <Compile Include="Actions\DropBomb.cs" />
         <Compile Include="Actions\GiveItem.cs" />
         <Compile Include="Actions\HealPlayer.cs" />
         <Compile Include="Actions\Ignite.cs" />

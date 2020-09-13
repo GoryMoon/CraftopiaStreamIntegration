@@ -5,6 +5,8 @@
 // ReSharper disable ArrangeTypeModifiers
 
 using HarmonyLib;
+using Oc;
+using Oc.Em;
 using Oc.OcInput;
 using UnityEngine;
 
@@ -40,6 +42,15 @@ namespace CraftopiaStreamIntegration
             {
                 __result.Scale(Vector2.left + Vector2.down);
             }
+        }
+    }
+    
+    [HarmonyPatch(typeof(OcPl), "Start")]
+    public class OcPl_Start_Patch
+    {
+        private static void Postfix(OcObjPoolCtrl ____PoolCtrl)
+        {
+            ____PoolCtrl.createPool((int) OcEm.ShellPoolType.Barrel_Fall, 300, SingletonMonoBehaviour<OcCharaData>.Inst.Shell_Barrel_Fall);
         }
     }
 }
