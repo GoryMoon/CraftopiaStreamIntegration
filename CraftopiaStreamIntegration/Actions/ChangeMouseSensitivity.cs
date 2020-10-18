@@ -16,16 +16,19 @@ namespace CraftopiaStreamIntegration.Actions
         public override ActionResponse Handle()
         {
             var player = OcPlMaster.Inst;
-            var sensitivity = SROptions.Current.Option_MouseSensitivity;
+            Utils.ChangeSensitivityStack.Push(SROptions.Current.Option_MouseSensitivity);
             SROptions.Current.Option_MouseSensitivity = _amount;
-            player.StartCoroutine(ChangeMouseBack(_time, sensitivity));
+            player.StartCoroutine(ChangeMouseBack(_time));
             return ActionResponse.Done;
         }
         
-        private static IEnumerator ChangeMouseBack(float time, float sensitivity)
+        private static IEnumerator ChangeMouseBack(float time)
         {
             yield return new WaitForSeconds(time);
-            SROptions.Current.Option_MouseSensitivity = sensitivity;
+            if (Utils.ChangeSensitivityStack.Count >= 0)
+                SROptions.Current.Option_MouseSensitivity = Utils.ChangeSensitivityStack.Pop();
+            else
+                SROptions.Current.Option_MouseSensitivity = 1;
         }
     }
 }

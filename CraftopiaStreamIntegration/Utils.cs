@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using HarmonyLib;
@@ -20,6 +22,12 @@ namespace CraftopiaStreamIntegration
         
         public static bool InvertMouse { get; set; }
         
+        public static Stack InvertControlsStack { get; } = new Stack();
+        
+        public static Stack InvertMouseStack { get; } = new Stack();
+        
+        public static Stack<float> ChangeSensitivityStack { get; } = new Stack<float>();
+        
         public static Vector3 RandomVector3(float range) => new Vector3(Random.Range(-range, range), Random.Range(-range, range), Random.Range(-range, range));
         
         public static Vector3 GetBoundedRandVector(float min, float max)
@@ -40,20 +48,26 @@ namespace CraftopiaStreamIntegration
             var items = new JsonArray();
             var itemDataMng = SingletonMonoBehaviour<OcItemDataMng>.Inst;
             var itemData = (ItemData[]) AccessTools.Field(typeof(OcItemDataMng), "validItemDataList").GetValue(itemDataMng);
-            items.AddRange(itemData.Select(item => new JsonItem
+            items.AddRange(itemData.Select(item =>
                 {
-                    ID = item.Id,
-                    DisplayName = item.DisplayName,
-                    Description = item.Description,
-                    Rarity = item.DisplayRarityType.Humanize(LetterCasing.Title),
-                    Category = item.ItemCategory.Humanize(LetterCasing.Title).Substring(4),
-                    Durability = item.DurabilityValue,
-                    Image = Convert.ToBase64String(DuplicateTexture(item.ItemImage_Icon.texture).EncodeToPNG())
+                    var cat = item.ItemCategory.Humanize(LetterCasing.Title);
+                    return new JsonItem
+                    {
+                        ID = item.Id,
+                        DisplayName = item.DisplayName,
+                        Description = item.Description,
+                        Rarity = item.DisplayRarityType.Humanize(LetterCasing.Title),
+                        Category = cat.Length > 4 ? cat.Substring(4): cat,
+                        Durability = item.DurabilityValue,
+                        Image = Convert.ToBase64String(DuplicateTexture(item.ItemImage_Icon.texture).EncodeToPNG())
+                    };
                 })
                 .Cast<object>());
+            
 
             var itemString = JsonConvert.SerializeObject(items, Formatting.None);
             File.WriteAllText(Application.dataPath + "/items.json", itemString);
+            CSIPlugin.Instance.Log.LogDebug(Application.dataPath + "/items.json");
             
             var enchantments = new JsonArray();
             enchantments.AddRange(OcResidentData.EnchantDataList.GetAll().Where(e => e.IsEnabled).Select(enchantment => new JsonEnchantment
@@ -66,6 +80,7 @@ namespace CraftopiaStreamIntegration
                 .Cast<object>());
             var enchantmentString = JsonConvert.SerializeObject(enchantments, Formatting.None);
             File.WriteAllText(Application.dataPath + "/enchantments.json", enchantmentString);
+            CSIPlugin.Instance.Log.LogDebug(Application.dataPath + "/enchantments.json");
         }
 
 

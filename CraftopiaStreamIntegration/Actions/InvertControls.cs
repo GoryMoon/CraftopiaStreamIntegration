@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Newtonsoft.Json;
 using Oc;
+using SR;
 using UnityEngine;
 
 namespace CraftopiaStreamIntegration.Actions
@@ -16,6 +17,7 @@ namespace CraftopiaStreamIntegration.Actions
         public override ActionResponse Handle()
         {
             Utils.InvertControls = true;
+            Utils.InvertControlsStack.Push(null);
             OcPlMaster.Inst.StartCoroutine(Reset(_time));
             return ActionResponse.Done;
         }
@@ -23,7 +25,9 @@ namespace CraftopiaStreamIntegration.Actions
         private static IEnumerator Reset(float time)
         {
             yield return new WaitForSeconds(time);
-            Utils.InvertControls = false;
+            
+            if (Utils.InvertControlsStack.Count <= 1) Utils.InvertControls = false;
+            if (Utils.InvertControlsStack.Count > 0) Utils.InvertControlsStack.Pop();
         }
     }
 }

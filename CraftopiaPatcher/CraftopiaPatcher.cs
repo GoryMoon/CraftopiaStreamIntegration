@@ -26,7 +26,7 @@ namespace CraftopiaPatcher
                 var customNameProperty = customNameField.EmitCreatePropertyForField("CustomName");
 
                 var headerType = module.Types.First(definition => definition.Name == "OcEnemyHeader");
-                var nameProperty = headerType.Methods.First(prop => prop.Name == "GetNameString");
+                var nameProperty = headerType.Methods.First(prop => prop.Name == "restart");
                 var ownerField = headerType.Fields.First(f => f.Name == "_owner");
                 
                 var first = nameProperty.Body.Instructions.First(i => i.OpCode == OpCodes.Box).Next;

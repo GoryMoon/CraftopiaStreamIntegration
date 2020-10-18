@@ -15,7 +15,9 @@ namespace CraftopiaStreamIntegration.Actions
 
         public override ActionResponse Handle()
         {
+            Utils.DumpItems();
             Utils.InvertMouse = true;
+            Utils.InvertMouseStack.Push(null);
             OcPlMaster.Inst.StartCoroutine(Reset(_time));
             return ActionResponse.Done;
         }
@@ -23,7 +25,9 @@ namespace CraftopiaStreamIntegration.Actions
         private static IEnumerator Reset(float time)
         {
             yield return new WaitForSeconds(time);
-            Utils.InvertMouse = false;
+            
+            if (Utils.InvertMouseStack.Count <= 1) Utils.InvertMouse = false;
+            if (Utils.InvertMouseStack.Count > 0) Utils.InvertMouseStack.Pop();
         }
     }
 }
