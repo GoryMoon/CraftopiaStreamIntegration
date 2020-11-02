@@ -33,6 +33,7 @@ namespace CraftopiaStreamIntegration
             AddAction(typeof(RefillMana));
             AddAction(typeof(RefillStamina));
             AddAction(typeof(RefillHunger));
+            AddAction(typeof(RepairTool));
         }
 
         ~ActionManager()

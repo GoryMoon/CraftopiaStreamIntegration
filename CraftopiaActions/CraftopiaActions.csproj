@@ -61,12 +61,13 @@
         <Compile Include="RefillHunger.cs" />
         <Compile Include="RefillMana.cs" />
         <Compile Include="RefillStamina.cs" />
+        <Compile Include="RepairTool.cs" />
         <Compile Include="SpawnMob.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     
     <Target Name="AfterBuild">
-        <Copy SourceFiles="./bin/Debug/CraftopiaActions.dll" DestinationFolder="D:\Development\IntegrationModding\StreamIntegrationApp\Integrations\Craftopia" />
+        <Copy SourceFiles="./bin/Release/CraftopiaActions.dll" DestinationFolder="D:\Development\IntegrationModding\StreamIntegrationApp\Integrations\Craftopia" />
     </Target>
 
 </Project>

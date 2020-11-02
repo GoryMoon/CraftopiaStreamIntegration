@@ -103,6 +103,7 @@
         <Compile Include="Actions\RefillHunger.cs" />
         <Compile Include="Actions\RefillMana.cs" />
         <Compile Include="Actions\RefillStamina.cs" />
+        <Compile Include="Actions\RepairTool.cs" />
         <Compile Include="Actions\SpawnMob.cs" />
         <Compile Include="CSIPlugin.cs" />
         <Compile Include="IntegrationManager.cs" />
