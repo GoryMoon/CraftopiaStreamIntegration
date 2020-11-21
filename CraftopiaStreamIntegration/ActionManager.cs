@@ -45,7 +45,11 @@ namespace CraftopiaStreamIntegration
 
         private void AddAction(Type action)
         {
-            if (!typeof(BaseAction).IsAssignableFrom(action)) return;
+            if (!typeof(BaseAction).IsAssignableFrom(action))
+            {
+                _logger.LogWarning($"Action {action} was of wrong type");
+                return;
+            }
 
             var type = action.Name.Underscore();
             _actions.Add(type, action);

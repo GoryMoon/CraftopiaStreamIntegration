@@ -30,9 +30,15 @@ namespace CraftopiaPatcher
                 var ownerField = headerType.Fields.First(f => f.Name == "_owner");
                 
                 var first = nameProperty.Body.Instructions.First(i => i.OpCode == OpCodes.Box).Next;
-                var formatMethod = nameProperty.Body.Instructions.Last(i => i.OpCode == OpCodes.Call);
+                var formatMethod = nameProperty.Body.Instructions.First(i => i.OpCode == OpCodes.Call && i.Previous.OpCode == OpCodes.Callvirt);
+                
+                var invalidRet = nameProperty.Body.Instructions.First(i => i.OpCode == OpCodes.Brfalse_S);
 
                 var processor = nameProperty.Body.GetILProcessor();
+                var ret = processor.Create(OpCodes.Ret);
+                processor.InsertAfter(invalidRet, ret);
+                processor.Replace(invalidRet, processor.Create(OpCodes.Brtrue_S, ret.Next));
+
                 processor.InsertBefore(first, processor.Create(OpCodes.Ldarg_0));
                 processor.InsertBefore(first, processor.Create(OpCodes.Ldfld, ownerField));
                 processor.InsertBefore(first, processor.Create(OpCodes.Callvirt, customNameProperty.GetMethod));

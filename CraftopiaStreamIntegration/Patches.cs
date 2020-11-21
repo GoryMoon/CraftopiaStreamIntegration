@@ -50,7 +50,7 @@ namespace CraftopiaStreamIntegration
     {
         private static void Postfix(OcObjPoolCtrl ____PoolCtrl)
         {
-            ____PoolCtrl.createPool((int) OcEm.ShellPoolType.Barrel_Fall, 1000, SingletonMonoBehaviour<OcCharaData>.Inst.Shell_Barrel_Fall);
+            ____PoolCtrl.createPool((int) OcEm.OcPoolType.Barrel_Fall, 1000, SingletonMonoBehaviour<OcCharaData>.Inst.Shell_Barrel_Fall);
         }
     }
 }

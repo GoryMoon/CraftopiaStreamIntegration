@@ -20,7 +20,7 @@ namespace CraftopiaStreamIntegration.Actions
             player.Gravity.ActionStateJumpCtrlVelocity = player.LastGndGravityVelH;
             
             player.Gravity.initGravityVelocity(Vector3.up * _amountVertical + Vector3.Scale(Utils.GetBoundedRandVector(_amount, _amount), Vector3.forward + Vector3.right));
-            player.Gravity.resetGravity();
+            player.Gravity.resetAccSum();
             player.Gravity.ignoreGravity();
             player.jumped();
             player.Health.setNoHitTimer(_noFallDamage);

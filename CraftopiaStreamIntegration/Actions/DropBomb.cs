@@ -44,7 +44,7 @@ namespace CraftopiaStreamIntegration.Actions
             for (var i = 0; i < amount; i++)
             {
                 var spawnVector = transform.position + OcUtility.calcCircleVec() * OcUtility.GaussianNormalizeRange(0.0f, radius) + Vector3.up * height;
-                (poolCtrl.Place((int) OcEm.ShellPoolType.Barrel_Fall, spawnVector, transform.rotation) as OcShell)?.setup(new OcShell.ShootInfo
+                (poolCtrl.Place((int) OcEm.OcPoolType.Barrel_Fall, spawnVector, transform.rotation) as OcShell)?.setup(new OcShell.ShootInfo
                 {
                     shooterFront = -Vector3.up,
                     shooterUp = transform.up,

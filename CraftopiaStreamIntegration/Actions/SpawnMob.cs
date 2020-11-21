@@ -45,7 +45,7 @@ namespace CraftopiaStreamIntegration.Actions
                     var spawnVector = player.transform.position + radiusVector + Vector3.up * 15f;
                     if (!Physics.Raycast(spawnVector, Vector3.down, out _, 200f, 1024))
                     {
-                        var guid = mobManager.doSpawn_FreeSlot_CheckHost_WithRayCheck(id, false, spawnVector,  (byte) (_level + Math.Max(0, _addPlayerLevel ? player.PlLevelCtrl.Level.Value: 0)));
+                        var guid = mobManager.doSpawn_FreeSlot_CheckHost_WithRayCheck(new RaycastHit[1], id, false, spawnVector,  (byte) (_level + Math.Max(0, _addPlayerLevel ? player.PlLevelCtrl.Level.Value: 0)));
                         var em = mobManager.getEmFromGuid(guid);
                         em.SetCustomName(From);
                         if (_despawnTime > 0)
