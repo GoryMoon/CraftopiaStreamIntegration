@@ -53,4 +53,17 @@ namespace CraftopiaStreamIntegration
             ____PoolCtrl.createPool((int) OcEm.OcPoolType.Barrel_Fall, 1000, SingletonMonoBehaviour<OcCharaData>.Inst.Shell_Barrel_Fall);
         }
     }
+    
+    [HarmonyPatch(typeof(OcUI_ChatHandler), "PopMessage")]
+    public class OcUI_ChatHandler_PopMessage_Patch
+    {
+        private static bool Prefix(int netId, string speakerName, string message)
+        {
+            if (!message.StartsWith("/")) return true;
+            
+            CommandManager.Instance.HandleMessage(speakerName, message);
+            return false;
+
+        }
+    }
 }

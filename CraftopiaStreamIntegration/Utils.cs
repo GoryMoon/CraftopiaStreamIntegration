@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace CraftopiaStreamIntegration
 {
-    public class Utils
+    public static class Utils
     {
         public static bool InGame => SingletonMonoBehaviour<OcGameMng>.Inst && SingletonMonoBehaviour<OcGameMng>.Inst.IsInGame;
         
@@ -66,8 +66,8 @@ namespace CraftopiaStreamIntegration
             
 
             var itemString = JsonConvert.SerializeObject(items, Formatting.None);
-            File.WriteAllText(Application.dataPath + "/items.json", itemString);
-            CSIPlugin.Instance.Log.LogDebug(Application.dataPath + "/items.json");
+            File.WriteAllText(Application.dataPath + "/../items.json", itemString);
+            CSIPlugin.Instance.Log.LogDebug(Application.dataPath + "/../items.json");
             
             var enchantments = new JsonArray();
             enchantments.AddRange(OcResidentData.EnchantDataList.GetAll().Where(e => e.IsEnabled).Select(enchantment => new JsonEnchantment
@@ -79,8 +79,8 @@ namespace CraftopiaStreamIntegration
                 })
                 .Cast<object>());
             var enchantmentString = JsonConvert.SerializeObject(enchantments, Formatting.None);
-            File.WriteAllText(Application.dataPath + "/enchantments.json", enchantmentString);
-            CSIPlugin.Instance.Log.LogDebug(Application.dataPath + "/enchantments.json");
+            File.WriteAllText(Application.dataPath + "/../enchantments.json", enchantmentString);
+            CSIPlugin.Instance.Log.LogDebug(Application.dataPath + "/../enchantments.json");
         }
 
 

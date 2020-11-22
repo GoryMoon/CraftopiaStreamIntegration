@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using CraftopiaStreamIntegration.Commands;
 using HarmonyLib;
 using UnityEngine.SceneManagement;
 // ReSharper disable InconsistentNaming
@@ -27,6 +28,7 @@ namespace CraftopiaStreamIntegration
             harmony.PatchAll();
             
             AccessUtils.Init();
+            CommandManager.Instance.RegisterCommand(new DumpCommand());
         }
 
         private void Awake()

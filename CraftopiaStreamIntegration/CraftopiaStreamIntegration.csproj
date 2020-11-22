@@ -105,6 +105,9 @@
         <Compile Include="Actions\RefillStamina.cs" />
         <Compile Include="Actions\RepairTool.cs" />
         <Compile Include="Actions\SpawnMob.cs" />
+        <Compile Include="CommandManager.cs" />
+        <Compile Include="Commands\DumpCommand.cs" />
+        <Compile Include="Commands\ICommand.cs" />
         <Compile Include="CSIPlugin.cs" />
         <Compile Include="IntegrationManager.cs" />
         <Compile Include="AccessUtils.cs" />
