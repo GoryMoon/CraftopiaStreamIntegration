@@ -40,7 +40,7 @@ namespace CraftopiaStreamIntegration.Actions
                 EquipmentSlots.ForEach((slot, i) =>
                 {
                     var stack = equipments.GetEquipStack(slot);
-                    if (stack != null && !stack.IsEmpty) equipments.TryUnEquipItem(stack);
+                    if (stack != null && !stack.IsEmpty) stack.TryUnequip();
                 });
             }
             foreach (var stack in stacks)
@@ -53,7 +53,7 @@ namespace CraftopiaStreamIntegration.Actions
                 
                 itemMng.activate(new OcDropItemActivateInfo
                 {
-                    poolType = OcDropItemMng.PoolType.KillDrop,
+                    poolType = OcDropItemMng.PoolType.KillDrop_Em,
                     pos = player.transform.position + Vector3.up * 0.8f,
                     item = stack.item,
                     stockNum = stack.StackCount,

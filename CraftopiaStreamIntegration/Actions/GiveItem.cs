@@ -49,7 +49,7 @@ namespace CraftopiaStreamIntegration.Actions
                 var itemMng = SingletonMonoBehaviour<OcDropItemMng>.Inst;
                 itemMng.activate(new OcDropItemActivateInfo
                 {
-                    poolType = OcDropItemMng.PoolType.KillDrop,
+                    poolType = OcDropItemMng.PoolType.KillDrop_Em,
                     pos = player.transform.position + Vector3.up * 0.8f,
                     item = item,
                     stockNum = _amount,

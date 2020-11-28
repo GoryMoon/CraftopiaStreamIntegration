@@ -25,6 +25,7 @@ namespace CraftopiaStreamIntegration
 
         public void Start()
         {
+            _messages = new ConcurrentQueue<string>();
             _source = new CancellationTokenSource();
             var token = _source.Token;
             _task = Task.Factory.StartNew(() =>

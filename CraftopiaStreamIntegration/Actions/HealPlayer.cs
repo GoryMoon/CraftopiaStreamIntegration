@@ -11,7 +11,7 @@ namespace CraftopiaStreamIntegration.Actions
 
         public override ActionResponse Handle()
         {
-            var health = OcPlMaster.Inst.Health;
+            var health = OcPlMaster.Inst.HealthPl;
             health.setForceHP(Mathf.Min(health.HP + _amount, health.MaxHP));
             return ActionResponse.Done;
         }

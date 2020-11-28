@@ -15,7 +15,6 @@ namespace CraftopiaStreamIntegration.Actions
 
         public override ActionResponse Handle()
         {
-            Utils.DumpItems();
             Utils.InvertMouse = true;
             Utils.InvertMouseStack.Push(null);
             OcPlMaster.Inst.StartCoroutine(Reset(_time));

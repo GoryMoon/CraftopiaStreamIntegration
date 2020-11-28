@@ -4,6 +4,8 @@
 // ReSharper disable UnusedMember.Local
 // ReSharper disable ArrangeTypeModifiers
 
+using System.Collections.Generic;
+using System.Reflection.Emit;
 using HarmonyLib;
 using Oc;
 using Oc.Em;
@@ -48,12 +50,29 @@ namespace CraftopiaStreamIntegration
     [HarmonyPatch(typeof(OcPl), "Start")]
     public class OcPl_Start_Patch
     {
+
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var found = false;
+            foreach (var instruction in instructions)
+            {
+                if (!found && instruction.opcode == OpCodes.Ldc_I4_5)
+                {
+                    found = true;
+                    yield return new CodeInstruction(OpCodes.Ldc_I4_6);
+                    continue;
+                }
+
+                yield return instruction;
+            }
+        }
+        
         private static void Postfix(OcObjPoolCtrl ____PoolCtrl)
         {
             ____PoolCtrl.createPool((int) OcEm.OcPoolType.Barrel_Fall, 1000, SingletonMonoBehaviour<OcCharaData>.Inst.Shell_Barrel_Fall);
         }
     }
-    
+
     [HarmonyPatch(typeof(OcUI_ChatHandler), "PopMessage")]
     public class OcUI_ChatHandler_PopMessage_Patch
     {

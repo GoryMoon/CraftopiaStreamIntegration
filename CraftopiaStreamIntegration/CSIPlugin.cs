@@ -13,7 +13,8 @@ namespace CraftopiaStreamIntegration
     {
 
         public ManualLogSource Log => Logger;
-        private IntegrationManager _integrationManager;
+
+        public IntegrationManager IntegrationManager { get; private set; }
         //private bool _setup;
         
         public ActionManager ActionManager { get; private set; }
@@ -29,13 +30,14 @@ namespace CraftopiaStreamIntegration
             
             AccessUtils.Init();
             CommandManager.Instance.RegisterCommand(new DumpCommand());
+            CommandManager.Instance.RegisterCommand(new ReconnectCommand());
         }
 
         private void Awake()
         {
             Logger.LogDebug("Started plugin");
 
-            _integrationManager = new IntegrationManager(this);
+            IntegrationManager = new IntegrationManager(this);
             ActionManager = new ActionManager(Logger);
 
             SceneManager.sceneLoaded += (scene, mode) =>
@@ -74,18 +76,18 @@ namespace CraftopiaStreamIntegration
 
         private void Start()
         {
-            _integrationManager.Start();
+            IntegrationManager.Start();
             InvokeRepeating(nameof(UpdateIntegration), 0, 0.1f);
         }
 
         private void UpdateIntegration()
         {
             if (!Utils.InGame) return;
-            _integrationManager.Update();
+            IntegrationManager.Update();
             ActionManager.Update();
         }
 
-        private void OnDestroy() => _integrationManager.Close();
+        private void OnDestroy() => IntegrationManager.Close();
         private void OnApplicationQuit() => OnDestroy();
     }
 }
